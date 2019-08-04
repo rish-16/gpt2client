@@ -1,6 +1,6 @@
-<h1 align="center">gpt2-client</h1>
+<h1 align="center">gpt2-client 🤖📝</h1>
 
-<p align="center">Easy-to-use Client for GPT-2 117M and 345M Transformer Models</p>
+<p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
 
 <!-- <center>
 
