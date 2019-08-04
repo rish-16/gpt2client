@@ -41,8 +41,6 @@ class GPT2Client(object):
 							pbar.update(chunk_size)
 
 	def generate(self, interactive=False, n_samples=1, words=None, display=True, return_text=False):
-		print (colored('Generating sample...', 'yellow'))
-
 		""" Returns generated text sample
 		
 		Parameters
@@ -73,6 +71,8 @@ class GPT2Client(object):
 
 		if not interactive:
 			# Generate random samples from scratch
+			print (colored('Generating sample...', 'yellow'))
+
 			models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
 			enc = encoder.get_encoder(self.model_name, self.save_dir)
 			hparams = model.default_hparams()
@@ -111,8 +111,8 @@ class GPT2Client(object):
 					for i in range(batch_size):
 						generated += batch_size
 						text = enc.decode(out[i])
-						print (colored('----------SAMPLE----------', 'cyan'))
-						
+						print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
+
 						if display:
 							print (text)
 
@@ -121,5 +121,60 @@ class GPT2Client(object):
 
 		else:
 			# Generate random samples from prompt
-			prompt = input('Enter a prompt got GPT-2 >> ')
-			print (prompt)
+			models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+			enc = encoder.get_encoder(self.model_name, self.save_dir)
+			hparams = model.default_hparams()
+
+			with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+				data = json.load(f)
+				hparams.override_from_dict(data)
+
+			length = hparams.n_ctx
+
+			with tf.Session(graph=tf.Graph()) as sess:
+				batch_size = 1
+				temperature = 1
+				top_k = 40
+
+				context = tf.placeholder(tf.int32, [batch_size, None])
+				np.random.seed(None)
+				tf.set_random_seed(None)
+
+				output = sample.sample_sequence(
+					hparams=hparams,
+					length=length,
+					start_token=enc.encoder['<|endoftext|>'],
+					batch_size=batch_size,
+					temperature=temperature, 
+					top_k=top_k
+				)
+
+				saver = tf.train.Saver()
+				ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+				saver.restore(sess, ckpt)
+
+				generated = 0
+				text = None
+
+				for _ in range(n_samples):
+					prompt = input('Enter a prompt got GPT-2 >> ')
+					print ('{}: {}\n'.format(colored('Prompt', attrs=['bold']), colored(prompt, 'green')))
+					print (colored('Generating sample...', 'yellow'))
+
+					context_tokens = enc.encode(prompt)
+					generated = 0
+					for _ in range(n_samples // batch_size):
+						out = sess.run(output, feed_dict={
+							context: [context_tokens for _ in range(batch_size)]
+						})[:, len(context_tokens):]
+
+						for i in range(batch_size):
+							generated += 1
+							text = enc.decode(out[i])
+							print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
+
+							if display:
+								print (text)
+
+							if return_text:
+								return text
