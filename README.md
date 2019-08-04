@@ -2,11 +2,11 @@
 
 <p align="center">Easy-to-use Client for GPT-2 117M and 345M Transformer Models</p>
 
-<center>
+<!-- <center>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-</center>
+</center> -->
 
 <center><img src="assets/demo.png" style="width: 80%;" /></center>
 
