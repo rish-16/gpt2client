@@ -9,7 +9,7 @@ import json
 
 import tensorflow as tf
 import numpy as np
-import model, sample, encoder
+import model, sample, encoder, train
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf.logging.set_verbosity(tf.logging.ERROR)
@@ -178,3 +178,5 @@ class GPT2Client(object):
 
 							if return_text:
 								return text
+
+	def finetune(self, corpus, epochs=10, verbose=True, learning_rate=1e-3):
