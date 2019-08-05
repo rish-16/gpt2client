@@ -105,12 +105,12 @@ class GPT2Client(object):
 				saver.restore(sess, ckpt)
 
 				generated = 0
-				text = None
+				text = []
 				while n_samples == 0 or generated < n_samples:
 					out = sess.run(output)
 					for i in range(batch_size):
 						generated += batch_size
-						text = enc.decode(out[i])
+						text.append(enc.decode(out[i]))
 						print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
 
 						if display:
@@ -163,6 +163,7 @@ class GPT2Client(object):
 
 					context_tokens = enc.encode(prompt)
 					generated = 0
+					text = []
 					for _ in range(n_samples // batch_size):
 						out = sess.run(output, feed_dict={
 							context: [context_tokens for _ in range(batch_size)]
@@ -170,7 +171,7 @@ class GPT2Client(object):
 
 						for i in range(batch_size):
 							generated += 1
-							text = enc.decode(out[i])
+							text.append(enc.decode(out[i]))
 							print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
 
 							if display:
@@ -179,4 +180,4 @@ class GPT2Client(object):
 							if return_text:
 								return text
 
-	def finetune(self, corpus, epochs=10, verbose=True, learning_rate=1e-3):
+	# def finetune(self, corpus, epochs=10, verbose=True, learning_rate=1e-3):
