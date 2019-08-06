@@ -10,17 +10,30 @@ import json
 import tensorflow as tf
 import numpy as np
 import model, sample, encoder
+import gpt_2_simple as gpt2
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf.logging.set_verbosity(tf.logging.ERROR)
 
 class GPT2Client(object):
-	def __init__(self, model_name='117M', save_dir='gpt2-models'):
+	def __init__(self, model_name='117M', save_dir='models'):
+		"""
+		Attributes
+		----------
+		attr: model_name (string)
+			- default: '117M'
+			- desc: Downloads the '117M' GPT-2 model. Can be set to '345M' model 
+		
+		attr: save_dir (string)
+			- default: 'models'
+			- desc: Name of directory where the weights, checkpoints, and 
+					hyper-parameters are downloaded and saved
+		"""
 		self.model_name = model_name
 		self.save_dir = save_dir
 
 	def download_model(self):
-		""" Creates `gpt2-models` directory and downloads model weights and checkpoints """
+		""" Creates `models` directory and downloads model weights and checkpoints """
 
 		if self.model_name not in ['117M', '345M']:
 			raise AssertionError('Please choose from either 117M or 345M parameter models only. This library does support other model sizes.')
@@ -105,12 +118,12 @@ class GPT2Client(object):
 				saver.restore(sess, ckpt)
 
 				generated = 0
-				text = None
+				text = []
 				while n_samples == 0 or generated < n_samples:
 					out = sess.run(output)
 					for i in range(batch_size):
 						generated += batch_size
-						text = enc.decode(out[i])
+						text.append(enc.decode(out[i]))
 						print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
 
 						if display:
@@ -157,12 +170,13 @@ class GPT2Client(object):
 				text = None
 
 				for _ in range(n_samples):
-					prompt = input('Enter a prompt got GPT-2 >> ')
+					prompt = input(colored('Enter a prompt got GPT-2 >> ', 'cyan'))
 					print ('{}: {}\n'.format(colored('Prompt', attrs=['bold']), colored(prompt, 'green')))
 					print (colored('Generating sample...', 'yellow'))
 
 					context_tokens = enc.encode(prompt)
 					generated = 0
+					text = []
 					for _ in range(n_samples // batch_size):
 						out = sess.run(output, feed_dict={
 							context: [context_tokens for _ in range(batch_size)]
@@ -170,7 +184,7 @@ class GPT2Client(object):
 
 						for i in range(batch_size):
 							generated += 1
-							text = enc.decode(out[i])
+							text.append(enc.decode(out[i]))
 							print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
 
 							if display:
@@ -178,3 +192,30 @@ class GPT2Client(object):
 
 							if return_text:
 								return text
+
+	def finetune(self, dataset, return_text=True):
+		"""  Returns generated text sample
+
+		Parameters
+		----------
+		arg: dataset (object)
+			- desc: Custom dataset text file
+
+		arg: return_text (bool)
+			- default: True
+			- desc: Toggles whether to return custom-generated text in an array after fine-tuning
+
+		Returns:
+			Generated string in an array
+		"""
+		sess = gpt2.start_tf_sess()
+		gpt2.finetune(sess,
+              dataset,
+              model_name=self.model_name,
+              steps=1000)   # steps is max number of training steps
+
+		if return_text:
+			text = gpt2.generate(sess, return_as_list=True)
+			return text
+		else:
+			gpt2.generate(sess)
