@@ -67,8 +67,8 @@ from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`
 
-my_corpus = open('shakespeare.txt', 'r').read()
-gpt2.finetune(x_train, y_train, epochs=10, batch_size=32) # Load your custom dataset
+my_corpus = 'shakespeare.txt'
+custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom dataset
 ```
 
-In order to fine-tune GPT-2 to your custom corpus or dataset, you must have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train your model to generate new forms of text.
+In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train/fine-tune your custom model.
