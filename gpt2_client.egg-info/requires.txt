@@ -1,0 +1,8 @@
+numpy
+tensorflow
+regex
+tqdm
+requests
+termcolor
+functools
+gpt_2_simple

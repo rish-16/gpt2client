@@ -8,11 +8,11 @@
 
 </center> -->
 
-<center><img src="assets/demo.png" style="width: 80%;" /></center>
+<img src="https://github.com/rish-16/gpt2client/raw/master/assets/demo.png" style="width: 80%;" />
 
-<h6 align="center">Made by Rishabh Anand • <a href="https://rish-16.github.io">https://rish-16.github.io</a></h6>
+<p align="center"><strong>Made by Rishabh Anand • <a href="https://rish-16.github.io">https://rish-16.github.io</a></strong></p>
 
-<h2 align="center">What is it</h2>
+<p aligh="center"><h2 align="center">What is it</h2></p>
 
 GPT-2 is NLP model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it. 
 <br>
@@ -24,7 +24,7 @@ Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](htt
 
 > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations.*
 
-<h2 align="center">Installation</h2>
+<p aligh="center"><h2 align="center">Installation</h2></p>
 
 Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>Python >= 3.5</strong> and <strong>TensorFlow >= 1.X</strong>. Some libraries may need to be reinstalled or upgraded using the `--upgrade` flag via `pip` if *Python 2.X* is used.
 
@@ -32,7 +32,7 @@ Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>P
 pip install gpt2-client
 ```
 
-<h2 align="center">Getting Started</h2>
+<p aligh="center"><h2 align="center">Getting started</h2></p>
 
 **1. Download the model**
 

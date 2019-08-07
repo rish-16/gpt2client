@@ -1,0 +1,13 @@
+README.md
+setup.cfg
+setup.py
+gpt2_client/__init__.py
+gpt2_client/encoder.py
+gpt2_client/gpt2_client.py
+gpt2_client/model.py
+gpt2_client/sample.py
+gpt2_client.egg-info/PKG-INFO
+gpt2_client.egg-info/SOURCES.txt
+gpt2_client.egg-info/dependency_links.txt
+gpt2_client.egg-info/requires.txt
+gpt2_client.egg-info/top_level.txt
