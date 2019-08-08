@@ -9,7 +9,9 @@ import json
 
 import tensorflow as tf
 import numpy as np
-import model, sample, encoder
+import model
+import sample
+import encoder
 import gpt_2_simple as gpt2
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
