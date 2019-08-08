@@ -2,13 +2,14 @@
 
 <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
 
-<!-- <center>
+<div align="center" style="display: flex;justify-content:space-evenly;width: 250px;margin: 0 auto;">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center"><a style="margin: 0 10px" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a></p>
+<p align="center"><a style="margin: 0 10px" href="https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
-</center> -->
+</div>
 
-<img src="https://github.com/rish-16/gpt2client/raw/master/assets/demo.png" style="width: 80%;" />
+<div><img src="https://github.com/rish-16/gpt2client/raw/master/assets/demo.png" /></div>
 
 <p align="center"><strong>Made by Rishabh Anand • <a href="https://rish-16.github.io">https://rish-16.github.io</a></strong></p>
 

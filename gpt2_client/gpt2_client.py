@@ -178,6 +178,7 @@ class GPT2Client(object):
 					context_tokens = enc.encode(prompt)
 					text_array = []
 					text = ''
+					generated = 0
 					for _ in range(n_samples // batch_size):
 						out = sess.run(output, feed_dict={
 							context: [context_tokens for _ in range(batch_size)]
