@@ -2,12 +2,18 @@
 
 <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
 
-<div align="center" style="display: flex;justify-content:space-evenly;width: 250px;margin: 0 auto;">
+<p align="center" style="display: flex;justify-content:space-evenly;width: 250px;margin: 0 auto;">
 
 <p align="center"><a style="margin: 0 10px" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a></p>
 <p align="center"><a style="margin: 0 10px" href="https://colab.research.google.com/drive/1RZwp1n6XeWxvhBjt1e3ATSOy4Mj9GEEl"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 
-</div>
+</p>
+
+<p align="center">
+  <a href="#what-is-it">What is it</a> •
+  <a href="#install">Install</a> •
+  <a href="#getting-started">Getting Started</a> •
+</p>
 
 <div><img src="https://github.com/rish-16/gpt2client/raw/master/assets/demo.png" /></div>
 
