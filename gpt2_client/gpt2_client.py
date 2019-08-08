@@ -409,7 +409,7 @@ def sample_sequence(hparams, length, start_token=None, batch_size=None, context=
         return tokens
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-tf.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 def default_hparams():
     return HParams(
