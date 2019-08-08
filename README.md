@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a style="padding: 0 10px;" href="#what-is-it">What is it</a>
-  <a style="padding: 0 10px;" href="#install">Installations</a>
+  <a style="padding: 0 10px;" href="#what-is-it">What is it</a> • 
+  <a style="padding: 0 10px;" href="#install">Installations</a> • 
   <a style="padding: 0 10px;" href="#getting-started">Getting Started</a>
 </p>
 
