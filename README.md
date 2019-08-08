@@ -4,9 +4,9 @@
 
 <p align="center">
 
-<a href="https://pypi.org/search/?q=bert-serving"><img src="https://img.shields.io/pypi/v/gpt2-client?color=%231dd1a1&logo=%231dd1a1&logoColor=%231dd1a1" alt="Pypi package"></a>
-<a style="margin: 0 10px" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/hanxiao/bert-as-service.svg" alt="GitHub license"></a>
-<a style="margin: 0 10px" href="https://colab.research.google.com/drive/1RZwp1n6XeWxvhBjt1e3ATSOy4Mj9GEEl"><img    src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+<a style="margin: 0 5px" href="https://pypi.org/search/?q=bert-serving"><img src="https://img.shields.io/pypi/v/gpt2-client?color=%231dd1a1&logo=%231dd1a1&logoColor=%231dd1a1" alt="Pypi package"></a>
+<a style="margin: 0 5px" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/hanxiao/bert-as-service.svg" alt="GitHub license"></a>
+<a style="margin: 0 5px" href="https://colab.research.google.com/drive/1RZwp1n6XeWxvhBjt1e3ATSOy4Mj9GEEl"><img    src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 </p>
 
