@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
 	name = 'gpt2_client',    # How you named your package folder (MyLib)
 	packages = ['gpt2_client'],   # Chose the same as "name"
-	version = '1.7.6',      # Start with a small number and increase it with every change you make
+	version = '1.7.7',      # Start with a small number and increase it with every change you make
 	license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
 	description = 'Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models',   # Give a short description about your library
 	long_description = long_description,
