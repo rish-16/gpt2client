@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 1.7.8
-Summary: Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models
+Version: 1.8
+Summary: Easy-to-use Wrapper for the GPT-2 117M and 345M Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
 Author-email: mail.rishabh.anand@gmail.com
 License: MIT
-Download-URL: https://github.com/rish-16/gpt2client/archive/1.6.tar.gz
+Download-URL: https://github.com/rish-16/gpt2client/archive/1.7.tar.gz
 Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
@@ -83,7 +83,7 @@ Description: <h1 align="center">gpt2-client 🤖📝</h1>
         In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train/fine-tune your custom model.
 Keywords: gpt-2,wrapper,transformer,machine learning,openai,text generation
 Platform: UNKNOWN
-Classifier: Development Status :: 3 - Alpha
+Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Software Development :: Build Tools
 Classifier: License :: OSI Approved :: MIT License
