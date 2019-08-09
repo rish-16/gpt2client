@@ -54,10 +54,10 @@ pip install gpt2-client
 from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`
-gpt2.download_model(save_dir='gpt2-models') # Rename it to anything
+gpt2.download_model(save_dir='models') # Rename it to anything. Saves to `models` by default.
 ```
 
-This creates a directory called `gpt2-models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `gpt2-models` directory.
+This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
 
 **2. Start generating text!**
 
