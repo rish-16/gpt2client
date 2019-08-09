@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 1.9.3
+Version: 1.9.4
 Summary: Easy-to-use Wrapper for the GPT-2 117M and 345M Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
 Author-email: mail.rishabh.anand@gmail.com
 License: MIT
-Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.3.tar.gz
+Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.4.tar.gz
 Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
@@ -45,7 +45,7 @@ Description: <h1 align="center">gpt2-client 🤖📝</h1>
         <br>
         Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around both GPT-2 models with less tha five lines of code.
         
-        > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations.*
+        > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples rae unfiltered and may contain offensive content. User discretion advised.*
         
         <p aligh="center"><h2 align="center">Installation</h2></p>
         
@@ -57,16 +57,16 @@ Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p aligh="center"><h2 align="center">Getting started</h2></p>
         
-        **1. Download the model**
+        **1. Download the model weights and checkpoints**
         
         ```python
         from gpt2_client import GPT2Client
         
         gpt2 = GPT2Client('117M') # This could also be `345M`
-        gpt2.download_model(save_dir='gpt2-models') # Rename it to anything
+        gpt2.download_model(save_dir='models') # Rename it to anything. Saves to `models` by default.
         ```
         
-        This creates a directory called `gpt2-models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `gpt2-models` directory.
+        This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
         
         **2. Start generating text!**
         
