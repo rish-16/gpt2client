@@ -48,7 +48,7 @@ pip install gpt2-client
 
 <p aligh="center"><h2 align="center">Getting started</h2></p>
 
-**1. Download the model**
+**1. Download the model weights and checkpoints**
 
 ```python
 from gpt2_client import GPT2Client
