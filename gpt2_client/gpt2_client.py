@@ -35,21 +35,34 @@ class GPT2Client(object):
 		"""
 		self.model_name = model_name
 		self.save_dir = save_dir
+		self.root_dir = os.path.expanduser('~/.gpt2_client/')
 
-	def download_model(self):
-		""" Creates `models` directory and downloads model weights and checkpoints """
+	def download_model(self, force_download = False):
+		""" Creates `models` directory and downloads model weights and checkpoints
+
+		Parameters
+		----------
+		arg: force_download (bool)
+			- default: False
+			- desc: Ignore cached files and redownload everything when set to True
+		"""
 
 		if self.model_name not in ['117M', '345M']:
 			raise AssertionError('Please choose from either 117M or 345M parameter models only. This library does support other model sizes.')
 		else:
-			subdir = os.path.join(self.save_dir, self.model_name)
+			subdir = os.path.join(self.root_dir, self.save_dir, self.model_name)
 			if not os.path.exists(subdir):
 				os.makedirs(subdir)
 			
 			for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
+				path = os.path.join(subdir, filename)
+				if os.path.exists(path) and not force_download:
+					print('Loading {}... file exists at {}'.format(filename, path))
+					continue
+
 				r = requests.get('https://storage.googleapis.com/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
 
-				with open(os.path.join(subdir, filename), 'wb') as f:
+				with open(path, 'wb') as f:
 					file_size = int(r.headers['content-length'])
 					chunk_size = 1000
 					with tqdm(ncols=100, desc='Downloading {}'.format(colored(filename, 'cyan', attrs=['bold'])), total=file_size, unit_scale=True) as pbar:
