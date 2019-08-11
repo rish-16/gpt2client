@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 1.9.6
+Version: 1.9.7
 Summary: Easy-to-use Wrapper for the GPT-2 117M and 345M Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
 Author-email: mail.rishabh.anand@gmail.com
 License: MIT
-Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.6.tar.gz
+Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.7.tar.gz
 Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
