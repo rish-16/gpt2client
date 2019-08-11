@@ -81,7 +81,7 @@ from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`
 
-my_corpus = 'shakespeare.txt'
+my_corpus = './data/shakespeare.txt' # path to corpus
 custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom dataset
 ```
 
