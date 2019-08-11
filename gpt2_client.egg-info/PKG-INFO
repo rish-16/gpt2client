@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 1.9.4
+Version: 1.9.5
 Summary: Easy-to-use Wrapper for the GPT-2 117M and 345M Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
 Author-email: mail.rishabh.anand@gmail.com
 License: MIT
-Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.4.tar.gz
+Download-URL: https://github.com/rish-16/gpt2client/archive/1.9.5.tar.gz
 Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p align="center">Easy-to-use Wrapper for GPT-2 117M and 345M Transformer Models</p>
@@ -37,13 +37,13 @@ Description: <h1 align="center">gpt2-client 🤖📝</h1>
         
         <p aligh="center"><h2 align="center">What is it</h2></p>
         
-        GPT-2 is NLP model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it. 
+        GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
         <br>
         <br>
         The `345M` model has 1.5 billion parameters and is the largest one yet. Only recently has OpenAI decided to release its training weights as part of its Staged Release plan. There have been several implications and debates over their release plan regarding misuse.
         <br>
         <br>
-        Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around both GPT-2 models with less tha five lines of code.
+        Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around both GPT-2 models with less than five lines of code.
         
         > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples rae unfiltered and may contain offensive content. User discretion advised.*
         
