@@ -54,7 +54,7 @@ pip install gpt2-client
 from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M', save_dir='models') # This could also be `345M`. Rename `save_dir` to anything.
-gpt2.download_model()
+gpt2.download_model(force_download=False) # Use cached versions if available. Set `force_download` to true to redownload the files.
 ```
 
 This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
