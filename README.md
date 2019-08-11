@@ -36,7 +36,7 @@ The `345M` model has 1.5 billion parameters and is the largest one yet. Only rec
 <br>
 Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around both GPT-2 models with less than five lines of code.
 
-> ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples rae unfiltered and may contain offensive content. User discretion advised.*
+> ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples are unfiltered and may contain offensive content. User discretion advised.*
 
 <p aligh="center"><h2 align="center">Installation</h2></p>
 
