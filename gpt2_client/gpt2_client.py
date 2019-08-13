@@ -109,8 +109,11 @@ class GPT2Client(object):
 			with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
 				data = json.load(f)
 				hparams.override_from_dict(data)
-
-			length = hparams.n_ctx
+                
+            if words is None:
+			    length = hparams.n_ctx
+            else:
+                length = words
 
 			with tf.Session(graph=tf.Graph()) as sess:
 				np.random.seed(None)
@@ -158,7 +161,10 @@ class GPT2Client(object):
 				data = json.load(f)
 				hparams.override_from_dict(data)
 
-			length = hparams.n_ctx
+            if words is None:
+			    length = hparams.n_ctx
+            else:
+                length = words
 
 			with tf.Session(graph=tf.Graph()) as sess:
 				batch_size = 1
@@ -172,7 +178,7 @@ class GPT2Client(object):
 				output = sample_sequence(
 					hparams=hparams,
 					length=length,
-					start_token=enc.encoder['<|endoftext|>'],
+					context=context,
 					batch_size=batch_size,
 					temperature=temperature, 
 					top_k=top_k
@@ -198,8 +204,9 @@ class GPT2Client(object):
 
 						for i in range(batch_size):
 							generated += 1
-							text += enc.decode(out[i])
-							text_array.append(enc.decode(out[i]))
+                            decoded = enc.decode(out[i])
+							text += decoded
+							text_array.append(decoded)
 							print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
 
 							if display:
