@@ -31,7 +31,7 @@
 GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
 <br>
 <br>
-The `345M` model has 1.5 billion parameters and is the largest one yet. Only recently has OpenAI decided to release its training weights as part of its Staged Release plan. There have been several implications and debates over their release plan regarding misuse.
+The `345M` model is currently the largest one available while the 1.5B model is being vetted for release with selected partners. Only recently has OpenAI decided to release its training weights as part of its Staged Release plan. There have been several implications and debates over their release plan regarding misuse.
 <br>
 <br>
 Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around both GPT-2 models with less than five lines of code.
