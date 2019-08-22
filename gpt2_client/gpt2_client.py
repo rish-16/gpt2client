@@ -69,6 +69,70 @@ class GPT2Client(object):
                         f.write(chunk)
                         pbar.update(chunk_size)
 
+    def generate_from_prompt(self, prompt_input, n_samples=1, words=None, display=False, return_text=True):
+        # Generate random samples from prompt
+        models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+        enc = get_encoder(self.model_name, self.save_dir)
+        hparams = default_hparams()
+
+        with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+            data = json.load(f)
+            hparams.override_from_dict(data)
+
+        if words is None:
+            length = hparams.n_ctx
+        else:
+            length = words
+
+        with tf.Session(graph=tf.Graph()) as sess:
+            batch_size = 1
+            temperature = 1
+            top_k = 40
+
+            context = tf.placeholder(tf.int32, [batch_size, None])
+            np.random.seed(None)
+            tf.set_random_seed(None)
+
+            output = sample_sequence(
+                hparams=hparams,
+                length=length,
+                context=context,
+                batch_size=batch_size,
+                temperature=temperature, 
+                top_k=top_k
+            )
+
+            saver = tf.train.Saver()
+            ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+            saver.restore(sess, ckpt)
+
+            for _ in range(n_samples):
+                prompt = prompt_input
+                # print ('{}: {}\n'.format(colored('Prompt', attrs=['bold']), colored(prompt, 'green')))
+                # print (colored('Generating sample...', 'yellow'))
+
+                context_tokens = enc.encode(prompt)
+                text_array = []
+                text = ''
+                generated = 0
+                for _ in range(n_samples // batch_size):
+                    out = sess.run(output, feed_dict={
+                        context: [context_tokens for _ in range(batch_size)]
+                    })[:, len(context_tokens):]
+
+                    for i in range(batch_size):
+                        generated += 1
+                        decoded = enc.decode(out[i])
+                        text += decoded
+                        text_array.append(decoded)
+                        # print (colored('---------------------SAMPLE---------------------\n', 'cyan'))
+
+                if display:
+                    print (text)
+
+            if return_text:
+                return text_array
+
     def generate(self, interactive=False, n_samples=1, words=None, display=True, return_text=False):
         """ Returns generated text sample
         
