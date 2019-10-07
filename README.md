@@ -26,7 +26,7 @@
 
 <p align="center"><strong>Made by Rishabh Anand • <a href="https://rish-16.github.io">https://rish-16.github.io</a></strong></p>
 
-<p aligh="center"><h2 align="center">What is it</h2></p>
+<p align="center"><h2 align="center">What is it</h2></p>
 
 GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
 <br>
@@ -38,7 +38,7 @@ Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](htt
 
 > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples are unfiltered and may contain offensive content. User discretion advised.*
 
-<p aligh="center"><h2 align="center">Installation</h2></p>
+<p align="center"><h2 align="center">Installation</h2></p>
 
 Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>Python >= 3.5</strong> and <strong>TensorFlow >= 1.X</strong>. Some libraries may need to be reinstalled or upgraded using the `--upgrade` flag via `pip` if *Python 2.X* is used.
 
@@ -46,7 +46,7 @@ Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>P
 pip install gpt2-client
 ```
 
-<p aligh="center"><h2 align="center">Getting started</h2></p>
+<p align="center"><h2 align="center">Getting started</h2></p>
 
 **1. Download the model weights and checkpoints**
 
@@ -105,3 +105,13 @@ custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom data
 ```
 
 In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train/fine-tune your custom model.
+
+<p align="center"><h2 align="center">Contributing</h2></p>
+
+Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
+
+All ideas – no matter how outrageous – welcome!
+
+<p align="center"><h2 align="center">Licence</h2></p>
+
+[MIT](https://github.com/rish-16/gpt2client/blob/master/LICENSE.txt)
