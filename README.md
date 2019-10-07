@@ -46,6 +46,8 @@ Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>P
 pip install gpt2-client
 ```
 
+> ***Note:*** `gpt2-client` is not compatible with TensorFlow 2.0
+
 <p align="center"><h2 align="center">Getting started</h2></p>
 
 **1. Download the model weights and checkpoints**
