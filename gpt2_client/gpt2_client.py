@@ -25,22 +25,31 @@ class GPT2Client(object):
         Attributes
         ----------
         attr: model_name (string)
-            - default: '117M'
-            - desc: Downloads the '117M' GPT-2 model. Can be set to '345M' model 
-        
+        - default: '117M'
+        - desc: Downloads the '117M' GPT-2 model. Can be set to '345M' model 
+
         attr: save_dir (string)
-            - default: 'models'
-            - desc: Name of directory where the weights, checkpoints, and 
-                    hyper-parameters are downloaded and saved
+        - default: 'models'
+        - desc: Name of directory where the weights, checkpoints, and 
+                hyper-parameters are downloaded and saved
+                
+        Methods
+        -------
+        load_model(force_download : bool)
+        generate(interactive : bool, n_samples : int, words : int, display : bool, return_text: bool) -> list
+        generate_batch_from_prompts(prompts : list) -> list
+        fintune(corpus : object, return_text : bool) -> text
         """
+        
         assert model_name in ['117M', '345M', '774M'], 'Please choose from either 117M, 345M, or 774M parameter models only. This library does support other model sizes.'
+        assert save_dir != '', 'Please enter a save directory for the model weights and checkpoints. This cannot be empty.'
 
         self.model_name = model_name
         self.save_dir = save_dir
         self.root_dir = os.path.expanduser('~/.gpt2_client/')
 
-	def load_model(self, force_download=False):
-		""" Creates `models` directory and downloads model weights and checkpoints
+    def load_model(self, force_download=False):
+        """ Creates `models` directory and downloads model weights and checkpoints
 
 		Parameters
 		----------
@@ -608,3 +617,9 @@ def model(hparams, X, past=None, scope='model', reuse=False):
         logits = tf.reshape(logits, [batch, sequence, hparams.n_vocab])
         results['logits'] = logits
         return results
+    
+gpt2 = GPT2Client('117M')
+gpt2.load_model(force_download=True)
+
+prompts = ["hello", "world", "this is a prompt"]
+gpt2.generate_batch_from_prompts(prompts)
