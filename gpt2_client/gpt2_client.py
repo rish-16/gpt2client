@@ -42,11 +42,21 @@ class GPT2Client(object):
         """
         
         assert model_name in ['117M', '345M', '774M'], 'Please choose from either 117M, 345M, or 774M parameter models only. This library does support other model sizes.'
-        assert save_dir != '', 'Please enter a save directory for the model weights and checkpoints. This cannot be empty.'
+        assert save_dir != '', 'Please provide a save directory for the model weights and checkpoints. This cannot be empty.'
 
         self.model_name = model_name
         self.save_dir = save_dir
-        self.root_dir = os.path.expanduser('~/.gpt2_client/')
+        
+    def download_helper(self, filename):
+        r = requests.get('https://storage.googleapis.com/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
+        
+        with open("./{}/{}/{}".format(self.save_dir, self.model_name, filename), 'wb') as f:
+            file_size = int(r.headers['content-length'])
+            chunk_size = 1000
+            with tqdm(ncols=100, desc='Downloading {}'.format(colored(filename, 'cyan', attrs=['bold'])), total=file_size, unit_scale=True) as pbar:
+                for chunk in r.iter_content(chunk_size=chunk_size):
+                    f.write(chunk)
+                    pbar.update(chunk_size)
 
     def load_model(self, force_download=False):
         """ Creates `models` directory and downloads model weights and checkpoints
@@ -57,26 +67,17 @@ class GPT2Client(object):
             - default: False
             - desc: Ignore cached files and redownload model weights and checkpoints when set to `True`
         """
-
-        subdir = os.path.join(self.root_dir, self.save_dir, self.model_name)
-        if not os.path.exists(subdir):
-            os.makedirs(subdir)
         
-        for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
-            path = os.path.join(subdir, filename)
-            if os.path.exists(path) and not force_download:
-                print('Loading {}... | file exists at {}'.format(filename, path))
-                continue
+        subdir = "./{}/{}/".format(self.save_dir, self.model_name)
+        if os.path.exists(subdir) == False:
+            os.makedirs(subdir)
 
-            r = requests.get('https://storage.googleapis.com/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
-
-            with open(path, 'wb') as f:
-                file_size = int(r.headers['content-length'])
-                chunk_size = 1000
-                with tqdm(ncols=100, desc='Downloading {}'.format(colored(filename, 'cyan', attrs=['bold'])), total=file_size, unit_scale=True) as pbar:
-                    for chunk in r.iter_content(chunk_size=chunk_size):
-                        f.write(chunk)
-                        pbar.update(chunk_size)
+            print ('Created `{}` directory to save model weights and checkpoints.'.format(self.save_dir))
+            for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
+                self.download_helper(filename)
+        else:
+            for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
+                print ('Loading {} | File already exists'.format(filename))
 
     def generate(self, interactive=False, n_samples=1, words=None, display=True, return_text=False):
         """ Returns generated text sample
@@ -106,47 +107,43 @@ class GPT2Client(object):
         Returns:
             An array of generated strings
         """
+        
+        models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+        enc = get_encoder(self.model_name, self.save_dir)
+        hparams = default_hparams()
 
-        if not interactive:
-            # Generate random samples from scratch
-            print (colored('Generating sample...', 'yellow'))
+        with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+            data = json.load(f)
+            hparams.override_from_dict(data)
 
-            models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
-            enc = get_encoder(self.model_name, self.save_dir)
-            hparams = default_hparams()
+        length = hparams.n_ctx
 
-            with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
-                data = json.load(f)
-                hparams.override_from_dict(data)
+        with tf.Session(graph=tf.Graph()) as sess:
+            batch_size = 1
+            temperature = 1
+            top_k = 40
 
-            if words is None:
-                length = hparams.n_ctx
-            else:
-                length = words
+            context = tf.placeholder(tf.int32, [batch_size, None])
+            np.random.seed(None)
+            tf.set_random_seed(None)
 
-            with tf.Session(graph=tf.Graph()) as sess:
-                np.random.seed(None)
-                tf.set_random_seed(None)
+            output = sample_sequence(
+                hparams=hparams,
+                length=length,
+                start_token=enc.encoder['<|endoftext|>'],
+                batch_size=batch_size,
+                temperature=temperature, 
+                top_k=top_k
+            )
 
-                batch_size = 1
-                temperature = 1
-                top_k = 40
+            saver = tf.train.Saver()
+            ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+            saver.restore(sess, ckpt)
 
-                output = sample_sequence(
-                    hparams=hparams,
-                    length=length,
-                    start_token=enc.encoder['<|endoftext|>'],
-                    batch_size=batch_size,
-                    temperature=temperature, 
-                    top_k=top_k
-                )
+            if not interactive:
+                # Generate random samples from scratch
+                print (colored('Generating sample...', 'yellow'))
 
-                saver = tf.train.Saver()
-                ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
-                saver.restore(sess, ckpt)
-
-                generated = 0
-                text = []
                 while n_samples == 0 or generated < n_samples:
                     out = sess.run(output)
                     for i in range(batch_size):
@@ -160,40 +157,8 @@ class GPT2Client(object):
                         if return_text:
                             return text
 
-        else:
-            # Generate random samples from prompt
-            models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
-            enc = get_encoder(self.model_name, self.save_dir)
-            hparams = default_hparams()
-
-            with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
-                data = json.load(f)
-                hparams.override_from_dict(data)
-
-            length = hparams.n_ctx
-
-            with tf.Session(graph=tf.Graph()) as sess:
-                batch_size = 1
-                temperature = 1
-                top_k = 40
-
-                context = tf.placeholder(tf.int32, [batch_size, None])
-                np.random.seed(None)
-                tf.set_random_seed(None)
-
-                output = sample_sequence(
-                    hparams=hparams,
-                    length=length,
-                    start_token=enc.encoder['<|endoftext|>'],
-                    batch_size=batch_size,
-                    temperature=temperature, 
-                    top_k=top_k
-                )
-
-                saver = tf.train.Saver()
-                ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
-                saver.restore(sess, ckpt)
-
+            else:
+                # Generate random samples from prompt
                 for _ in range(n_samples):
                     prompt = input(colored('Enter a prompt got GPT-2 >> ', 'cyan'))
                     print ('{}: {}\n'.format(colored('Prompt', attrs=['bold']), colored(prompt, 'green')))
@@ -233,11 +198,57 @@ class GPT2Client(object):
             An array of generated text for each prompt given in `batch`
         """                
         
+        final_generated_text = []
         
+        models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+        enc = get_encoder(self.model_name, self.save_dir)
+        hparams = default_hparams()
+
+        with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+            data = json.load(f)
+            hparams.override_from_dict(data)
+
+        length = hparams.n_ctx
+
+        with tf.Session(graph=tf.Graph()) as sess:
+            batch_size = 1
+            temperature = 1
+            top_k = 40
+
+            context = tf.placeholder(tf.int32, [batch_size, None])
+            np.random.seed(None)
+            tf.set_random_seed(None)
+
+            output = sample_sequence(
+                hparams=hparams,
+                length=length,
+                start_token=enc.encoder['<|endoftext|>'],
+                batch_size=batch_size,
+                temperature=temperature, 
+                top_k=top_k
+            )
+
+            saver = tf.train.Saver()
+            ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+            saver.restore(sess, ckpt)
         
-        for i in batch:
-            
-            
+            for i in batch:
+                context_tokens = enc.encode(i)
+                text_array = []
+                text = ''
+                generated = 0
+                for _ in range(n_samples // batch_size):
+                    out = sess.run(output, feed_dict={
+                        context: [context_tokens for _ in range(batch_size)]
+                    })[:, len(context_tokens):]
+
+                    for i in range(batch_size):
+                        generated += 1
+                        text += enc.decode(out[i])
+                        
+                        final_generated_text.append(enc.decode(out[i]))
+                
+        return final_generated_text
 
     def finetune(self, corpus, return_text=True):
         """ Returns generated text sample
@@ -367,16 +378,15 @@ class Encoder:
         return text
 
 def get_encoder(model_name, models_dir):
-    with open(os.path.join(models_dir, model_name, 'encoder.json'), 'r') as f:
+    with open("./{}/{}/".format(models_dir, model_name) + 'encoder.json', 'r') as f:
         encoder = json.load(f)
-    with open(os.path.join(models_dir, model_name, 'vocab.bpe'), 'r', encoding="utf-8") as f:
+    with open("./{}/{}/".format(models_dir, model_name) + 'vocab.bpe', 'r', encoding="utf-8") as f:
         bpe_data = f.read()
     bpe_merges = [tuple(merge_str.split()) for merge_str in bpe_data.split('\n')[1:-1]]
     return Encoder(
         encoder=encoder,
         bpe_merges=bpe_merges,
     )
-
 
 def top_k_logits(logits, k):
     if k == 0:
@@ -396,7 +406,6 @@ def top_k_logits(logits, k):
          lambda: logits,
          lambda: _top_k(),
     )
-
 
 def sample_sequence(hparams, length, start_token=None, batch_size=None, context=None, temperature=1, top_k=0):
     if start_token is None:
@@ -625,8 +634,12 @@ def model(hparams, X, past=None, scope='model', reuse=False):
         results['logits'] = logits
         return results
     
-gpt2 = GPT2Client('117M')
+gpt2 = GPT2Client('117M', save_dir="models")
 gpt2.load_model(force_download=False)
 
-prompts = ["hello", "world", "this is a prompt"]
-gpt2.generate_batch_from_prompts(prompts)
+prompts = [
+    "Today is a beautiful day",
+    "Today was a very bad day"
+]
+
+gpt2.generate(interactive=True)
