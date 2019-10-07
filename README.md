@@ -53,18 +53,20 @@ pip install gpt2-client
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M', save_dir='models') # This could also be `345M`. Rename `save_dir` to anything.
-gpt2.download_model(force_download=False) # Use cached versions if available. Set `force_download` to true to redownload the files.
+gpt2 = GPT2Client('117M', save_dir='models') # This could also be `345M` or `774M`. Rename `save_dir` to anything.
+gpt2.load_model(force_download=False) # Use cached versions if available.
 ```
 
-This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `download_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
+This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `load_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
+
+> ***Note:*** Set `force_download=True` to overwrite the existing cached model weights and checkpoints
 
 **2. Start generating text!**
 
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`
+gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
 
 gpt2.generate(interactive=True) # Asks user for prompt
 gpt2.generate(n_samples=4) # Generates 4 pieces of text
@@ -74,12 +76,29 @@ gpt2.generate(interactive=True, n_samples=3) # A different prompt each time
 
 You can see from the aforementioned sample that the generation options are highly flexible. You can mix and match based on what kind of text you need generated, be it multiple chunks or one at a time with prompts.
 
-**3. Fine-tuning GPT-2 to custom datasets**
+**3. Generating text from batch of prompts**
 
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`
+gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
+
+prompts = [
+  "This is a prompt 1",
+  "This is a prompt 2",
+  "This is a prompt 3",
+  "This is a prompt 4"
+]
+
+text = gpt2.generate_batch_from_prompts(prompts) # returns an array of generated text
+```
+
+**4. Fine-tuning GPT-2 to custom datasets**
+
+```python
+from gpt2_client import GPT2Client
+
+gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
 
 my_corpus = './data/shakespeare.txt' # path to corpus
 custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom dataset

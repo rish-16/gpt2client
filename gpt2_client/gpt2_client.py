@@ -39,14 +39,14 @@ class GPT2Client(object):
         self.save_dir = save_dir
         self.root_dir = os.path.expanduser('~/.gpt2_client/')
 
-	def download_model(self, force_download = False):
+	def load_model(self, force_download=False):
 		""" Creates `models` directory and downloads model weights and checkpoints
 
 		Parameters
 		----------
 		arg: force_download (bool)
 			- default: False
-			- desc: Ignore cached files and redownload everything when set to True
+			- desc: Ignore cached files and redownload model weights and checkpoints when set to `True`
 		"""
 
         subdir = os.path.join(self.root_dir, self.save_dir, self.model_name)
@@ -56,7 +56,7 @@ class GPT2Client(object):
         for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
             path = os.path.join(subdir, filename)
             if os.path.exists(path) and not force_download:
-                print('Loading {}... file exists at {}'.format(filename, path))
+                print('Loading {}... | file exists at {}'.format(filename, path))
                 continue
 
             r = requests.get('https://storage.googleapis.com/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
