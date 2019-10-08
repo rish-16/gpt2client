@@ -77,7 +77,10 @@ class GPT2Client(object):
                 self.download_helper(filename)
         else:
             for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
-                print ('Loading {} | File already exists'.format(filename))
+                if os.path.exists(subdir + filename):
+                    print ('Loading {} | File already exists'.format(filename))
+                else:
+                    self.download_helper(filename)
 
     def generate(self, interactive=False, n_samples=1, words=None, display=True, return_text=False):
         """ Returns generated text sample
@@ -526,7 +529,6 @@ def attention_mask(nd, ns, dtype):
     m = i >= j - ns + nd
     return tf.cast(m, dtype)
 
-
 def attn(x, scope, n_state, past, hparams):
     assert x.shape.ndims == 3    # Should be [batch, sequence, features]
     assert n_state % hparams.n_head == 0
@@ -572,14 +574,12 @@ def attn(x, scope, n_state, past, hparams):
         a = conv1d(a, 'c_proj', n_state)
         return a, present
 
-
 def mlp(x, scope, n_state, hparams):
     with tf.variable_scope(scope):
         nx = x.shape[-1].value
         h = gelu(conv1d(x, 'c_fc', n_state))
         h2 = conv1d(h, 'c_proj', nx)
         return h2
-
 
 def block(x, scope, past, hparams):
     with tf.variable_scope(scope):
@@ -603,7 +603,6 @@ def positions_for(tokens, past_length):
     batch_size = tf.shape(tokens)[0]
     nsteps = tf.shape(tokens)[1]
     return expand_tile(past_length + tf.range(nsteps), batch_size)
-
 
 def model(hparams, X, past=None, scope='model', reuse=False):
     with tf.variable_scope(scope, reuse=reuse):
@@ -642,4 +641,4 @@ prompts = [
     "Today was a very bad day"
 ]
 
-gpt2.generate(interactive=True)
+gpt2.generate(interactive=True, words=40)
