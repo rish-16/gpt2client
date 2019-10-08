@@ -71,14 +71,15 @@ class GPT2Client(object):
         subdir = "./{}/{}/".format(self.save_dir, self.model_name)
         if os.path.exists(subdir) == False:
             os.makedirs(subdir)
-
-            print ('Created `{}` directory to save model weights and checkpoints.'.format(self.save_dir))
+            print ('Created `{}/{}` directory to save model weights and checkpoints.'.format(self.save_dir, self.model_name))
+            
+        if force_download == True:
             for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
                 self.download_helper(filename)
         else:
             for filename in ['checkpoint', 'encoder.json', 'hparams.json', 'model.ckpt.data-00000-of-00001', 'model.ckpt.index', 'model.ckpt.meta', 'vocab.bpe']:
                 if os.path.exists(subdir + filename):
-                    print ('Loading {} | File already exists'.format(filename))
+                    print ('{0:<60}{1:<20}'.format("Loading " + colored(filename, 'cyan', attrs=['bold']), "File already exists"))
                 else:
                     self.download_helper(filename)
 
@@ -236,11 +237,12 @@ class GPT2Client(object):
             saver.restore(sess, ckpt)
         
             for i in batch:
+                print ('Prompt: {}'.format(i))
                 context_tokens = enc.encode(i)
                 text_array = []
                 text = ''
                 generated = 0
-                for _ in range(n_samples // batch_size):
+                for _ in range(len(batch) // batch_size):
                     out = sess.run(output, feed_dict={
                         context: [context_tokens for _ in range(batch_size)]
                     })[:, len(context_tokens):]
@@ -641,4 +643,5 @@ prompts = [
     "Today was a very bad day"
 ]
 
-gpt2.generate(interactive=True, words=40)
+text = gpt2.generate_batch_from_prompts(prompts)
+print (text)
