@@ -634,14 +634,3 @@ def model(hparams, X, past=None, scope='model', reuse=False):
         logits = tf.reshape(logits, [batch, sequence, hparams.n_vocab])
         results['logits'] = logits
         return results
-    
-gpt2 = GPT2Client('117M', save_dir="models")
-gpt2.load_model(force_download=False)
-
-prompts = [
-    "Today is a beautiful day",
-    "Today was a very bad day"
-]
-
-text = gpt2.generate_batch_from_prompts(prompts)
-print (text)
