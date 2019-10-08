@@ -9,9 +9,9 @@ with open(path.join(this_directory, 'README.md')) as f:
 setup(
 	name = 'gpt2_client',
 	packages = ['gpt2_client'],
-	version = '1.9.7',
+	version = '2.0',
 	license='MIT',
-	description = 'Easy-to-use Wrapper for the GPT-2 117M and 345M Transformer Models',
+	description = 'Easy-to-use Wrapper for the GPT-2 117M, 345M, and 774M Transformer Models',
 	long_description = long_description,
 	long_description_content_type = 'text/markdown',
 	author = 'Rishabh Anand',
