@@ -17,8 +17,8 @@ setup(
 	author = 'Rishabh Anand',
 	author_email = 'mail.rishabh.anand@gmail.com',
 	url = 'https://github.com/rish-16/gpt2client',
-	download_url = 'https://github.com/rish-16/gpt2client/archive/1.9.7.tar.gz',
-	keywords = ['gpt-2', 'wrapper', 'transformer', 'machine learning', 'openai', 'text generation'],
+	download_url = 'https://github.com/rish-16/gpt2client/archive/2.0.tar.gz',
+	keywords = ['gpt-2', 'AI', 'ML', 'wrapper', 'transformer', 'machine learning', 'openai', 'text generation'],
 	install_requires=[
 			'numpy',
 			'tensorflow',
