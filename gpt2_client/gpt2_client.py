@@ -35,6 +35,7 @@ class GPT2Client(object):
                 
         Methods
         -------
+        download_helper(filename : string)
         load_model(force_download : bool)
         generate(interactive : bool, n_samples : int, words : int, display : bool, return_text: bool) -> list
         generate_batch_from_prompts(prompts : list) -> list
