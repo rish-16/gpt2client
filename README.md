@@ -28,7 +28,7 @@
 
 <p align="center"><h2 align="center">What is it</h2></p>
 
-GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has two versions - `117M` and `345M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
+GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 3 versions - `117M`, `345M`, and `774M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
 <br>
 <br>
 The 774M model is currently the largest available model released by OpenAI. The 1.5B model is meant for researchers and collaborators who are authorised to use it.
