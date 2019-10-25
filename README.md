@@ -75,7 +75,7 @@ gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
 
 gpt2.generate(interactive=True) # Asks user for prompt
 gpt2.generate(n_samples=4) # Generates 4 pieces of text
-text = gpt.generate(return_text=True) # Generates text and returns it in an array
+text = gpt2.generate(return_text=True) # Generates text and returns it in an array
 gpt2.generate(interactive=True, n_samples=3) # A different prompt each time
 ```
 
