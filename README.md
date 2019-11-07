@@ -111,12 +111,6 @@ custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom data
 
 In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train/fine-tune your custom model.
 
-<p align="center"><h2 align="center">Contributing</h2></p>
-
-Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
-
-All ideas – no matter how outrageous – welcome!
-
 **5. Encoding and decoding text sequences**
 
 ```python
@@ -133,6 +127,12 @@ encs = gpt2.encode_seq("Hello world, this is a sentence")
 decs = gpt2.decode_seq(encs)
 # Hello world, this is a sentence
 ```
+
+<p align="center"><h2 align="center">Contributing</h2></p>
+
+Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
+
+All ideas – no matter how outrageous – welcome!
 
 <p align="center"><h2 align="center">Licence</h2></p>
 
