@@ -1,6 +1,6 @@
 <h1 align="center">gpt2-client</h1>
 
-<p align="center">Easy-to-use Wrapper for GPT-2 117M, 345M, and 774M Transformer Models</p>
+<p align="center">Easy-to-use Wrapper for GPT-2 117M, 345M, 774M, and 1.5B Transformer Models</p>
 
 <p align="center">
 
@@ -31,10 +31,10 @@
 
 <p align="center"><h2 align="center">What is it</h2></p>
 
-GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 3 versions - `117M`, `345M`, and `774M` - that differ based on the amount of training data fed to it and the number of parameters they contain. 
+GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 4 versions - `117M`, `345M`, `774M`, and `1558M` - that differ in terms of the amount of training data fed to it and the number of parameters they contain. 
 <br>
 <br>
-The 774M model is currently the largest available model released by OpenAI. The 1.5B model is meant for researchers and collaborators who are authorised to use it.
+The 1.5B model is currently the largest available model released by OpenAI.
 <br>
 <br>
 Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around with all three GPT-2 models in less than five lines of code.
@@ -58,7 +58,7 @@ pip install gpt2-client
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M', save_dir='models') # This could also be `345M` or `774M`. Rename `save_dir` to anything.
+gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`. Rename `save_dir` to anything.
 gpt2.load_model(force_download=False) # Use cached versions if available.
 ```
 
@@ -71,7 +71,7 @@ This creates a directory called `models` in the current working directory and do
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
+gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
 
 gpt2.generate(interactive=True) # Asks user for prompt
 gpt2.generate(n_samples=4) # Generates 4 pieces of text
@@ -86,7 +86,7 @@ You can see from the aforementioned sample that the generation options are highl
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
+gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
 
 prompts = [
   "This is a prompt 1",
@@ -103,7 +103,7 @@ text = gpt2.generate_batch_from_prompts(prompts) # returns an array of generated
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M` or `774M`
+gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
 
 my_corpus = './data/shakespeare.txt' # path to corpus
 custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom dataset
@@ -116,6 +116,23 @@ In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have
 Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
 
 All ideas – no matter how outrageous – welcome!
+
+**5. Encoding and decoding text sequences**
+
+```python
+from gpt2_client import GPT2Client
+
+gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2.load_model()
+
+# encoding a sentence
+encs = gpt2.encode_seq("Hello world, this is a sentence")
+# [15496, 995, 11, 428, 318, 257, 6827]
+
+# decoding an encoded sequence
+decs = gpt2.decode_seq(encs)
+# Hello world, this is a sentence
+```
 
 <p align="center"><h2 align="center">Licence</h2></p>
 

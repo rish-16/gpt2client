@@ -9,15 +9,15 @@ with open(path.join(this_directory, 'README.md')) as f:
 setup(
 	name = 'gpt2_client',
 	packages = ['gpt2_client'],
-	version = '2.0',
+	version = '2.1.2',
 	license='MIT',
-	description = 'Easy-to-use Wrapper for the GPT-2 117M, 345M, and 774M Transformer Models',
+	description = 'Easy-to-use Wrapper for the GPT-2 117M, 345M, 774M, and 1.5B Transformer Models',
 	long_description = long_description,
 	long_description_content_type = 'text/markdown',
 	author = 'Rishabh Anand',
 	author_email = 'mail.rishabh.anand@gmail.com',
 	url = 'https://github.com/rish-16/gpt2client',
-	download_url = 'https://github.com/rish-16/gpt2client/archive/2.0.tar.gz',
+	download_url = 'https://github.com/rish-16/gpt2client/archive/2.1.tar.gz',
 	keywords = ['gpt-2', 'AI', 'ML', 'wrapper', 'transformer', 'machine learning', 'openai', 'text generation'],
 	install_requires=[
 			'numpy',

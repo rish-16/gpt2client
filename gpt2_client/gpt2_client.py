@@ -26,7 +26,7 @@ class GPT2Client(object):
         ----------
         attr: model_name (string)
         - default: '117M'
-        - desc: Downloads the '117M' GPT-2 model. Can be set to '345M' model 
+        - desc: Downloads the '117M' GPT-2 model. Can alternatively be set to the '345M', '774M', or '1558M' model
 
         attr: save_dir (string)
         - default: 'models'
@@ -37,12 +37,14 @@ class GPT2Client(object):
         -------
         download_helper(filename : string)
         load_model(force_download : bool)
-        generate(interactive : bool, n_samples : int, words : int, display : bool, return_text: bool) -> list
-        generate_batch_from_prompts(prompts : list) -> list
+        generate(interactive : bool, n_samples : int, words : int, display : bool, return_text: bool) -> list of string
+        generate_batch_from_prompts(prompts : list) -> list of string
         fintune(corpus : object, return_text : bool) -> text
+        encode_seq(sequence : string) -> list of integer
+        decode_seq(sequence : string) -> list of string
         """
         
-        assert model_name in ['117M', '345M', '774M'], 'Please choose from either 117M, 345M, or 774M parameter models only. This library does support other model sizes.'
+        assert model_name in ['117M', '345M', '774M', '1558M'], 'Please choose from either 117M, 345M, 774M, or 1558M parameter models only. This library does support other model sizes.'
         assert save_dir != '', 'Please provide a save directory for the model weights and checkpoints. This cannot be empty.'
 
         self.model_name = model_name
@@ -282,7 +284,81 @@ class GPT2Client(object):
             return text
         else:
             gpt2.generate(sess)	
+                 
+    def encode_seq(self, sequence):
+        models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+        enc = get_encoder(self.model_name, self.save_dir)
+        hparams = default_hparams()
 
+        with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+            data = json.load(f)
+            hparams.override_from_dict(data)
+        
+        length = hparams.n_ctx
+
+        with tf.Session(graph=tf.Graph()) as sess:
+            batch_size = 1
+            temperature = 1
+            top_k = 40
+
+            context = tf.placeholder(tf.int32, [batch_size, None])
+            np.random.seed(None)
+            tf.set_random_seed(None)
+
+            output = sample_sequence(
+                hparams=hparams,
+                length=length,
+                start_token=enc.encoder['<|endoftext|>'],
+                batch_size=batch_size,
+                temperature=temperature, 
+                top_k=top_k
+            )
+
+            saver = tf.train.Saver()
+            ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+            saver.restore(sess, ckpt)
+            
+            context_tokens = enc.encode(sequence)
+            
+            return context_tokens
+        
+    def decode_seq(self, encodings):
+        models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
+        enc = get_encoder(self.model_name, self.save_dir)
+        hparams = default_hparams()
+
+        with open(os.path.join(self.save_dir, self.model_name, 'hparams.json')) as f:
+            data = json.load(f)
+            hparams.override_from_dict(data)
+            
+        length = hparams.n_ctx
+
+        with tf.Session(graph=tf.Graph()) as sess:
+            batch_size = 1
+            temperature = 1
+            top_k = 40
+
+            context = tf.placeholder(tf.int32, [batch_size, None])
+            np.random.seed(None)
+            tf.set_random_seed(None)
+
+            output = sample_sequence(
+                hparams=hparams,
+                length=length,
+                start_token=enc.encoder['<|endoftext|>'],
+                batch_size=batch_size,
+                temperature=temperature, 
+                top_k=top_k
+            )
+
+            saver = tf.train.Saver()
+            ckpt = tf.train.latest_checkpoint(os.path.join(self.save_dir, self.model_name))
+            saver.restore(sess, ckpt)
+            
+            sequences = enc.decode(encodings)
+            
+            return sequences
+            
 @lru_cache()
 def bytes_to_unicode():
     """
