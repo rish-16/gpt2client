@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 2.1.2
+Version: 2.1.3
 Summary: Easy-to-use Wrapper for the GPT-2 117M, 345M, 774M, and 1.5B Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
@@ -120,12 +120,6 @@ Description: <h1 align="center">gpt2-client</h1>
         
         In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have a GPU or TPU at hand. [Google Colab](http://colab.research.google.com) is one such tool you can make use of to re-train/fine-tune your custom model.
         
-        <p align="center"><h2 align="center">Contributing</h2></p>
-        
-        Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
-        
-        All ideas – no matter how outrageous – welcome!
-        
         **5. Encoding and decoding text sequences**
         
         ```python
@@ -142,6 +136,12 @@ Description: <h1 align="center">gpt2-client</h1>
         decs = gpt2.decode_seq(encs)
         # Hello world, this is a sentence
         ```
+        
+        <p align="center"><h2 align="center">Contributing</h2></p>
+        
+        Suggestions, improvements, and enhancements are always welcome! If you have any issues, please do raise one in the Issues section. If you have an improvement, do file an issue to discuss the suggestion before creating a PR.
+        
+        All ideas – no matter how outrageous – welcome!
         
         <p align="center"><h2 align="center">Licence</h2></p>
         
