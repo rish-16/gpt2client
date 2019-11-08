@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 2.1.3
+Version: 2.1.4
 Summary: Easy-to-use Wrapper for the GPT-2 117M, 345M, 774M, and 1.5B Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
@@ -84,7 +84,7 @@ Description: <h1 align="center">gpt2-client</h1>
         
         gpt2.generate(interactive=True) # Asks user for prompt
         gpt2.generate(n_samples=4) # Generates 4 pieces of text
-        text = gpt.generate(return_text=True) # Generates text and returns it in an array
+        text = gpt2.generate(return_text=True) # Generates text and returns it in an array
         gpt2.generate(interactive=True, n_samples=3) # A different prompt each time
         ```
         
