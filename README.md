@@ -22,7 +22,7 @@
 <p align="center">
 
   <a>
-    <a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" style="height: 45px !important;width: 150px !important; border-radius: 5px !important; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;" ></a>
+    <a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" style="width: 100px !important; border-radius: 5px !important; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;" ></a>
   </a>
 
 </p>
