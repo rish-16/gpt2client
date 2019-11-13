@@ -45,7 +45,7 @@ GPT-2 is a Natural Language Processing model [developed by OpenAI](https://opena
 The 1.5B model is currently the largest available model released by OpenAI.
 <br>
 <br>
-Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around with all three GPT-2 models in less than five lines of code.
+Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around with all four GPT-2 models in less than five lines of code.
 
 > ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples are unfiltered and may contain offensive content. User discretion advised.*
 
