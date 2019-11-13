@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: gpt2-client
-Version: 2.1.4
+Version: 2.1.5
 Summary: Easy-to-use Wrapper for the GPT-2 117M, 345M, 774M, and 1.5B Transformer Models
 Home-page: https://github.com/rish-16/gpt2client
 Author: Rishabh Anand
