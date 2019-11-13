@@ -5,7 +5,7 @@
 <p align="center">
 
   <a>
-    <a style="margin: 0 5px" href="https://pypi.org/search/?q=gpt2-client"><img src="https://img.shields.io/pypi/v/gpt2-client?color=%231dd1a1&logo=%231dd1a1&logoColor=%231dd1a1" alt="Pypi package"></a>
+    <a style="margin: 0 5px" href="https://pypi.org/project/gpt2-client/"><img src="https://img.shields.io/pypi/v/gpt2-client?color=%231dd1a1&logo=%231dd1a1&logoColor=%231dd1a1" alt="Pypi package"></a>
   </a>
   <a>
     <a style="margin: 0 5px" href="https://pepy.tech/project/gpt2-client"><img src="https://pepy.tech/badge/gpt2-client" alt="GitHub license"></a>
