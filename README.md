@@ -21,7 +21,9 @@
 
 <p align="center">
 
-  <a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-green.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+  <a>
+    <a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important; border-radius: 5px !important; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;" ></a>
+  </a>
 
 </p>
 
@@ -144,7 +146,7 @@ All ideas – no matter how outrageous – welcome!
 
 Open-source is really fun. Your donations motivate me to bring fresh ideas to life. If interested in supporting my open-source endeavours, please do donate – it means a lot to me!
 
-<a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-green.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/qHtxL0S" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important; border-radius: 5px !important; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;" ></a>
 
 <p align="center"><h2 align="center">Licence</h2></p>
 
