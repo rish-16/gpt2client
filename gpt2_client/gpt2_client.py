@@ -40,8 +40,8 @@ class GPT2Client(object):
         generate(interactive : bool, n_samples : int, words : int, display : bool, return_text: bool) -> list of string
         generate_batch_from_prompts(prompts : list) -> list of string
         fintune(corpus : object, return_text : bool) -> text
-        encode_seq(sequence : string) -> list of integer
-        decode_seq(sequence : string) -> list of string
+        encode_seq(sequence : string) -> numpy array of integer
+        decode_seq(sequence : integers) -> list of string
         """
         
         assert model_name in ['117M', '345M', '774M', '1558M'], 'Please choose from either 117M, 345M, 774M, or 1558M parameter models only. This library does support other model sizes.'
@@ -319,10 +319,15 @@ class GPT2Client(object):
             saver.restore(sess, ckpt)
             
             context_tokens = enc.encode(sequence)
+            content_tokens = np.array(content_tokens)
             
             return context_tokens
         
     def decode_seq(self, encodings):
+        # converting numpy array to list
+        if type(encodings).__module__ == np.__name__:
+            encodings = encodings.tolist()
+
         models_dir = models_dir = os.path.expanduser(os.path.expandvars(self.save_dir))
         enc = get_encoder(self.model_name, self.save_dir)
         hparams = default_hparams()
