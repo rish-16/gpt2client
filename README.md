@@ -80,6 +80,7 @@ This creates a directory called `models` in the current working directory and do
 from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2.load_model()
 
 gpt2.generate(interactive=True) # Asks user for prompt
 gpt2.generate(n_samples=4) # Generates 4 pieces of text
@@ -95,6 +96,7 @@ You can see from the aforementioned sample that the generation options are highl
 from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2.load_model()
 
 prompts = [
   "This is a prompt 1",
@@ -112,6 +114,7 @@ text = gpt2.generate_batch_from_prompts(prompts) # returns an array of generated
 from gpt2_client import GPT2Client
 
 gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2.load_model()
 
 my_corpus = './data/shakespeare.txt' # path to corpus
 custom_text = gpt2.finetune(my_corpus, return_text=True) # Load your custom dataset
