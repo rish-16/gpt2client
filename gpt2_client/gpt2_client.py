@@ -150,6 +150,9 @@ class GPT2Client(object):
             if not interactive:
                 # Generate random samples from scratch
                 print (colored('Generating sample...', 'yellow'))
+                
+                #must initialize generated...
+                generated = 0
 
                 while n_samples == 0 or generated < n_samples:
                     out = sess.run(output)
