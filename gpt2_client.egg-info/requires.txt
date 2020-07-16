@@ -1,5 +1,5 @@
 numpy
-tensorflow
+tensorflow<2
 regex
 tqdm
 requests
