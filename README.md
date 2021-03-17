@@ -1,6 +1,6 @@
 <h1 align="center">gpt2-client</h1>
 
-<p align="center">Easy-to-use Wrapper for GPT-2 117M, 345M, 774M, and 1.5B Transformer Models</p>
+<p align="center">Easy-to-use Wrapper for GPT-2 124M, 355M, 774M, and 1.5B Transformer Models</p>
 
 <p align="center">
 
@@ -39,7 +39,7 @@
 
 <p align="center"><h2 align="center">What is it</h2></p>
 
-GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 4 versions - `117M`, `345M`, `774M`, and `1558M` - that differ in terms of the amount of training data fed to it and the number of parameters they contain. 
+GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 4 versions - `124M`, `355M`, `774M`, and `1558M` - that differ in terms of the amount of training data fed to it and the number of parameters they contain.
 <br>
 <br>
 The 1.5B model is currently the largest available model released by OpenAI.
@@ -47,17 +47,17 @@ The 1.5B model is currently the largest available model released by OpenAI.
 <br>
 Finally, `gpt2-client` is a wrapper around the original [`gpt-2` repository](https://github.com/openai/gpt-2) that features the same functionality but with more accessiblity, comprehensibility, and utilty. You can play around with all four GPT-2 models in less than five lines of code.
 
-> ***Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples are unfiltered and may contain offensive content. User discretion advised.*
+> **\*Note**: This client wrapper is in no way liable to any damage caused directly or indirectly. Any names, places, and objects referenced by the model are fictional and seek no resemblance to real life entities or organisations. Samples are unfiltered and may contain offensive content. User discretion advised.\*
 
 <p align="center"><h2 align="center">Installation</h2></p>
 
-Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>Python >= 3.5</strong> and <strong>TensorFlow >= 1.X</strong>. Some libraries may need to be reinstalled or upgraded using the `--upgrade` flag via `pip` if *Python 2.X* is used.
+Install client via `pip`. Ideally, `gpt2-client` is well supported for <strong>Python >= 3.5</strong> and <strong>TensorFlow >= 1.X</strong>. Some libraries may need to be reinstalled or upgraded using the `--upgrade` flag via `pip` if _Python 2.X_ is used.
 
 ```bash
 pip install gpt2-client
 ```
 
-> ***Note:*** `gpt2-client` is **not** compatible with TensorFlow 2.0 , try TensorFlow 1.14.0
+> **_Note:_** `gpt2-client` is **not** compatible with TensorFlow 2.0 , try TensorFlow 1.14.0
 
 <p align="center"><h2 align="center">Getting started</h2></p>
 
@@ -66,20 +66,20 @@ pip install gpt2-client
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`. Rename `save_dir` to anything.
+gpt2 = GPT2Client('124M') # This could also be `355M`, `774M`, or `1558M`. Rename `save_dir` to anything.
 gpt2.load_model(force_download=False) # Use cached versions if available.
 ```
 
 This creates a directory called `models` in the current working directory and downloads the weights, checkpoints, model JSON, and hyper-parameters required by the model. Once you have called the `load_model()` function, you need not call it again assuming that the files have finished downloading in the `models` directory.
 
-> ***Note:*** Set `force_download=True` to overwrite the existing cached model weights and checkpoints
+> **_Note:_** Set `force_download=True` to overwrite the existing cached model weights and checkpoints
 
 **2. Start generating text!**
 
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2 = GPT2Client('124M') # This could also be `355M`, `774M`, or `1558M`
 gpt2.load_model()
 
 gpt2.generate(interactive=True) # Asks user for prompt
@@ -95,7 +95,7 @@ You can see from the aforementioned sample that the generation options are highl
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2 = GPT2Client('124M') # This could also be `355M`, `774M`, or `1558M`
 gpt2.load_model()
 
 prompts = [
@@ -113,7 +113,7 @@ text = gpt2.generate_batch_from_prompts(prompts) # returns an array of generated
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2 = GPT2Client('124M') # This could also be `355M`, `774M`, or `1558M`
 gpt2.load_model()
 
 my_corpus = './data/shakespeare.txt' # path to corpus
@@ -127,7 +127,7 @@ In order to fine-tune GPT-2 to your custom corpus or dataset, it's ideal to have
 ```python
 from gpt2_client import GPT2Client
 
-gpt2 = GPT2Client('117M') # This could also be `345M`, `774M`, or `1558M`
+gpt2 = GPT2Client('124M') # This could also be `355M`, `774M`, or `1558M`
 gpt2.load_model()
 
 # encoding a sentence

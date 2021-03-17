@@ -20,13 +20,13 @@ except ImportError:
     from backports.functools_lru_cache import lru_cache
 
 class GPT2Client(object):
-    def __init__(self, model_name='117M', save_dir='models'):
+    def __init__(self, model_name='124M', save_dir='models'):
         """
         Attributes
         ----------
         attr: model_name (string)
-        - default: '117M'
-        - desc: Downloads the '117M' GPT-2 model. Can alternatively be set to the '345M', '774M', or '1558M' model
+        - default: '124M'
+        - desc: Downloads the '124M' GPT-2 model. Can alternatively be set to the '355M', '774M', or '1558M' model
 
         attr: save_dir (string)
         - default: 'models'
@@ -44,14 +44,14 @@ class GPT2Client(object):
         decode_seq(sequence : integers) -> list of string
         """
         
-        assert model_name in ['117M', '345M', '774M', '1558M'], 'Please choose from either 117M, 345M, 774M, or 1558M parameter models only. This library does support other model sizes.'
+        assert model_name in ['124M', '355M', '774M', '1558M'], 'Please choose from either 124M, 355M, 774M, or 1558M parameter models only. This library does support other model sizes.'
         assert save_dir != '', 'Please provide a save directory for the model weights and checkpoints. This cannot be empty.'
 
         self.model_name = model_name
         self.save_dir = save_dir
         
     def download_helper(self, filename):
-        r = requests.get('https://storage.googleapis.com/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
+        r = requests.get('https://openaipublic.blob.core.windows.net/gpt-2/models/' + self.model_name + '/' + filename, stream=True)
         
         with open("./{}/{}/{}".format(self.save_dir, self.model_name, filename), 'wb') as f:
             file_size = int(r.headers['content-length'])
