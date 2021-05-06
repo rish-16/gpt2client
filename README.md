@@ -1,4 +1,4 @@
-<h1 align="center">gpt2-client</h1>
+<h1 align="center">gpt2-client (Archived)</h1>
 
 <p align="center">Easy-to-use Wrapper for GPT-2 124M, 355M, 774M, and 1.5B Transformer Models</p>
 
