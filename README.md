@@ -1,6 +1,6 @@
 <h1 align="center">gpt2-client (Archived)</h1>
 
-<p align="center">Easy-to-use Wrapper for GPT-2 124M, 355M, 774M, and 1.5B Transformer Models</p>
+<p align="center">Easy-to-use Wrapper for GPT-2 124M, 345M, 774M, and 1.5B Transformer Models</p>
 
 <p align="center">
 
@@ -39,7 +39,7 @@
 
 <p align="center"><h2 align="center">What is it</h2></p>
 
-GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 4 versions - `124M`, `355M`, `774M`, and `1558M` - that differ in terms of the amount of training data fed to it and the number of parameters they contain.
+GPT-2 is a Natural Language Processing model [developed by OpenAI](https://openai.com/blog/better-language-models/) for text generation. It is the successor to the GPT (Generative Pre-trained Transformer) model trained on 40GB of text from the internet. It features a Transformer model that was brought to light by the [Attention Is All You Need](https://arxiv.org/abs/1706.03762) paper in 2017. The model has 4 versions - `124M`, `345M`, `774M`, and `1558M` - that differ in terms of the amount of training data fed to it and the number of parameters they contain.
 <br>
 <br>
 The 1.5B model is currently the largest available model released by OpenAI.
